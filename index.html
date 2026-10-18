@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Sayang ❤️</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ================= LATAR BELAKANG (GANTI FOTO DI SINI) ================= */
+  body {
+    min-height: 100vh;
+    /* GANTI 'background-utama.jpg' DENGAN FOTO KALIAN BERDUA */
+    background-image: linear-gradient(135deg, rgba(26,0,51,0.85), rgba(102,0,51,0.85)), url('background-utama.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ================= TOMBOL MUSIK MENGAMBANG ================= */
+  .music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 105, 180, 0.8);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+  .music-btn:hover {
+    background: #ff1493;
+    transform: scale(1.1);
+  }
+  .music-btn.playing {
+    animation: pulseMusic 1.5s infinite;
+  }
+  @keyframes pulseMusic {
+    0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 105, 180, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0); }
+  }
+
+  /* ================= ANIMASI LATAR ================= */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute; background: #fff; border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+  .heart {
+    position: absolute; bottom: -50px; font-size: 24px;
+    animation: floatUp linear infinite; opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ================= HALAMAN UTAMA ================= */
+  .container {
+    position: relative; z-index: 2; max-width: 800px;
+    margin: 0 auto; padding: 60px 24px 80px; text-align: center;
+  }
+  .cake-icon {
+    font-size: 70px; display: inline-block;
+    animation: bounce 2s infinite ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  h1 {
+    font-family: 'Great Vibes', cursive; font-size: clamp(2.8rem, 9vw, 5rem);
+    margin: 10px 0 4px;
+    background: linear-gradient(90deg, #ffb6c1, #ff69b4, #ffd700, #ff69b4);
+    background-size: 300% auto; -webkit-background-clip: text;
+    background-clip: text; color: transparent;
+    animation: shine 4s linear infinite; line-height: 1.1;
+  }
+  @keyframes shine { to { background-position: 300% center; } }
+  .subtitle {
+    font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #ffb6c1; margin-bottom: 32px; font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .card {
+    background: rgba(40, 10, 60, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px; padding: 36px 28px; margin-bottom: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    animation: fadeUp 1.2s ease both;
+  }
+  .card:nth-of-type(2) { animation-delay: 0.3s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card p { font-size: 1.05rem; line-height: 1.9; font-weight: 300; color: #ffe4ef; }
+  .verse { font-style: italic; color: #ffd700; font-size: 1.15rem; line-height: 1.8; }
+  .verse-ref {
+    display: block; margin-top: 14px; font-style: normal; font-weight: 600;
+    color: #ffb6c1; letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase;
+  }
+  .card h2 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 16px; }
+  .btn {
+    margin-top: 10px; padding: 16px 42px; font-size: 1.05rem; font-family: 'Poppins', sans-serif;
+    font-weight: 600; color: #fff; background: linear-gradient(135deg, #ff69b4, #ff1493);
+    border: none; border-radius: 50px; cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5); transition: transform 0.3s, box-shadow 0.3s;
+    animation: pulseBtn 2s infinite;
+  }
+  @keyframes pulseBtn {
+    0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 105, 180, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0); }
+  }
+  .btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 15px 40px rgba(255, 20, 147, 0.8); animation: none; }
+  .btn:active { transform: scale(0.97); }
+  footer { margin-top: 20px; font-size: 0.85rem; color: rgba(255, 182, 193, 0.6); letter-spacing: 1px; }
+
+  /* ================= HALAMAN GALERI (POPUP) ================= */
+  .gallery-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: linear-gradient(135deg, rgba(26,0,51,0.95), rgba(102,0,51,0.95));
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    display: flex; flex-direction: column; align-items: center; 
+    justify-content: flex-start;
+    padding: 40px 20px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s;
+    overflow-y: auto; 
+  }
+  .gallery-overlay.show { opacity: 1; visibility: visible; }
+
+  .gallery-content {
+    display: flex; flex-direction: column; align-items: center;
+    transform: translateY(30px); transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%; max-width: 900px;
+    margin-top: 20px; 
+  }
+  .gallery-overlay.show .gallery-content { transform: translateY(0); }
+
+  .gallery-title {
+    font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 6vw, 3.5rem);
+    color: #ffb6c1; text-align: center; margin-bottom: 5px;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+  }
+  .gallery-subtitle {
+    font-size: 1rem; color: #ffe4ef; text-align: center;
+    margin-bottom: 30px; font-weight: 300; letter-spacing: 1px;
+    max-width: 600px; line-height: 1.8; /* Diperlebar sedikit agar puisi rapi */
+  }
+
+  .polaroid-gallery {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+    margin-bottom: 40px; padding: 10px; max-width: 800px;
+  }
+  .polaroid {
+    background: #fff; padding: 10px 10px 35px 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border-radius: 4px; position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    width: 200px; 
+  }
+  .polaroid:nth-child(1) { transform: rotate(-4deg); }
+  .polaroid:nth-child(2) { transform: rotate(3deg); }
+  .polaroid:nth-child(3) { transform: rotate(-2deg); }
+  .polaroid:nth-child(4) { transform: rotate(2deg); }
+  .polaroid:nth-child(5) { transform: rotate(-3deg); }
+  .polaroid:nth-child(6) { transform: rotate(4deg); }
+  
+  .polaroid:hover {
+    transform: scale(1.1) rotate(0deg) !important; 
+    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.6);
+    z-index: 10;
+  }
+  .polaroid img {
+    width: 100%; height: 180px; object-fit: cover;
+    border-radius: 2px; background: #eee;
+  }
+  .polaroid span {
+    position: absolute; bottom: 8px; left: 0; width: 100%;
+    text-align: center; font-family: 'Great Vibes', cursive;
+    font-size: 1.3rem; color: #660033; font-weight: bold;
+  }
+
+  .close-gallery-btn {
+    padding: 14px 40px; border-radius: 50px;
+    background: transparent; border: 2px solid #ff69b4;
+    color: #ffb6c1; font-family: 'Poppins', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    transition: all 0.3s; margin-bottom: 40px;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+  }
+  .close-gallery-btn:hover {
+    background: #ff69b4; color: #fff;
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+  }
+
+  #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 99; }
+  
+  @media (max-width: 650px) {
+    .gallery-overlay { padding: 30px 15px; }
+    .polaroid-gallery { gap: 15px; }
+    .polaroid { width: 140px; padding: 8px 8px 30px 8px; }
+    .polaroid img { height: 130px; }
+    .polaroid span { font-size: 1.1rem; bottom: 6px; }
+    .music-btn { width: 40px; height: 40px; font-size: 18px; bottom: 15px; right: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= AUDIO LAGU ROMANTIS ================= -->
+<!-- Pastikan file lagu berformat mp3 dan namanya sama -->
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik Mengambang -->
+<div class="music-btn" id="musicBtn" title="Putar / Jeda Lagu">🎵</div>
+
+<!-- Bintang & Hati -->
+<div class="stars" id="stars"></div>
+<div class="hearts" id="hearts"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<!-- HALAMAN UTAMA -->
+<main class="container">
+  <span class="cake-icon">🎂</span>
+  <h1>Happy Birthday</h1>
+  <p class="subtitle">Maafkan Aku yang Terlambat</p>
+
+  <div class="card">
+    <p>
+      Selamat ulang tahun, Sayang. Maafkan aku yang baru bisa memberikan ini sekarang, 
+      aku tahu aku terlambat. Tapi percayalah, rasa sayang dan doaku untukmu tidak pernah 
+      sedetik pun terlambat. Terima kasih sudah menjadi perempuan paling hebat yang 
+      selalu sabar menghadapiku. 🌹
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Firman Tuhan</h2>
+    <p class="verse">
+      "Kiranya diberikan-Nya kepadamu apa yang kaukehendaki dan dijadikan-Nya berhasil apa yang kaurancangkan."
+      <span class="verse-ref">— Mazmur 20:5</span>
+    </p>
+  </div>
+
+  <button class="btn" id="surpriseBtn">Buka Kejutan Terakhir 💌</button>
+  <footer>Dibuat dengan ❤️ dan rasa bersalah yang manis</footer>
+</main>
+
+<!-- ================= HALAMAN GALERI FOTO (KEJUTAN) ================= -->
+<div class="gallery-overlay" id="galleryOverlay">
+  <div class="gallery-content">
+    
+    <h2 class="gallery-title">My Late Surprise</h2>
+    <p class="gallery-subtitle">
+      Hadiah ini mungkin datang terlambat,<br>
+      tapi cintaku tidak pernah telat untukmu.<br>
+      Lewat setiap foto, aku ingin kamu tahu:<br>
+      kamu adalah hal terbaik yang pernah hadir dalam hidupku.<br>
+      Aku mencintaimu, kemarin, hari ini, dan selamanya.
+    </p>
+
+    <div class="polaroid-gallery">
+      <div class="polaroid">
+        <img src="foto1.png" alt="Foto 1">
+        <span>My Favorite</span>
+      </div>
+      <div class="polaroid">
+        <img src="foto2.jpeg" alt="Foto 2">
+        <span>Together</span>
+      </div>
+      <div class="polaroid">
+        <img src="foto6.jpeg" alt="Foto 3">
+        <span>Always</span>
+      </div>
+      <div class="polaroid">
+        <img src="foto4.jpeg" alt="Foto 4">
+        <span>My Love</span>
+      </div>
+      <div class="polaroid">
+        <img src="foto5.jpeg" alt="Foto 5">
+        <span>Forever</span>
+      </div>
+      <div class="polaroid">
+        <img src="foto3.jpeg" alt="Foto 6">
+        <span>Beautiful</span>
+      </div>
+    </div>
+
+    <button class="close-gallery-btn" id="closeGalleryBtn">Tutup Momen ❤️</button>
+  </div>
+</div>
+
+<script>
+/* ================= LATAR BELAKANG ================= */
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 1;
+  s.style.width = size + 'px'; s.style.height = size + 'px';
+  s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+  starsContainer.appendChild(s);
+}
+
+const heartsContainer = document.getElementById('hearts');
+const heartEmojis = ['❤️', '💕', '💖', '💗', '💘', '🌸', '🌹'];
+function spawnHeart() {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+  h.style.left = Math.random() * 100 + '%';
+  h.style.fontSize = (Math.random() * 20 + 14) + 'px';
+  const duration = Math.random() * 6 + 6;
+  h.style.animationDuration = duration + 's';
+  heartsContainer.appendChild(h);
+  setTimeout(() => h.remove(), duration * 1000);
+}
+setInterval(spawnHeart, 600);
+
+/* ================= CONFETTI ================= */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let confettiParticles = [];
+let confettiActive = false;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const confettiColors = ['#ff69b4', '#ffd700', '#ffb6c1', '#ff1493', '#ffffff', '#c084fc'];
+
+function launchConfetti(amount = 180) {
+  confettiActive = true;
+  for (let i = 0; i < amount; i++) {
+    confettiParticles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height * 0.5 - 20,
+      w: Math.random() * 8 + 4, h: Math.random() * 8 + 4,
+      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+      vx: Math.random() * 4 - 2, vy: Math.random() * 3 + 2,
+      rot: Math.random() * 360, vr: Math.random() * 10 - 5,
+      life: 0, maxLife: Math.random() * 120 + 120
+    });
+  }
+  if (!confettiActive) return;
+  requestAnimationFrame(animateConfetti);
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confettiParticles.forEach((p, idx) => {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.rot += p.vr; p.life++;
+    if (p.life > p.maxLife) { confettiParticles.splice(idx, 1); return; }
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate((p.rot * Math.PI) / 180);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = Math.max(0, 1 - p.life / p.maxLife);
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.restore();
+  });
+  if (confettiParticles.length > 0) requestAnimationFrame(animateConfetti);
+  else { confettiActive = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+}
+
+/* ================= LOGIKA TOMBOL, MUSIK & GALERI ================= */
+const galleryOverlay = document.getElementById('galleryOverlay');
+const surpriseBtn = document.getElementById('surpriseBtn');
+const closeGalleryBtn = document.getElementById('closeGalleryBtn');
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+function updateMusicIcon() {
+  if (bgMusic.paused) {
+    musicBtn.textContent = '🔇'; 
+    musicBtn.classList.remove('playing');
+  } else {
+    musicBtn.textContent = '🎵'; 
+    musicBtn.classList.add('playing');
+  }
+}
+
+musicBtn.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
+  updateMusicIcon();
+});
+
+surpriseBtn.addEventListener('click', () => {
+  galleryOverlay.classList.add('show');
+  
+  if (bgMusic) {
+    bgMusic.play().catch(error => {
+      console.log("Musik gagal diputar otomatis oleh browser:", error);
+    });
+    updateMusicIcon();
+  }
+
+  launchConfetti(250); 
+  for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i * 100);
+});
+
+closeGalleryBtn.addEventListener('click', () => {
+  galleryOverlay.classList.remove('show');
+});
+
+galleryOverlay.addEventListener('click', (e) => {
+  if (e.target === galleryOverlay) {
+    galleryOverlay.classList.remove('show');
+  }
+});
+
+bgMusic.addEventListener('play', updateMusicIcon);
+bgMusic.addEventListener('pause', updateMusicIcon);
+
+window.addEventListener('load', () => {
+  setTimeout(() => launchConfetti(100), 600);
+});
+</script>
+</body>
+</html>
